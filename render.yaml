@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: nutrifix-social-agent
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run server
+    envVars:
+      - key: NODE_VERSION
+        value: 20.9.0
+      - key: VITE_APP_URL
+        fromService:
+          type: web
+          name: nutrifix-social-agent
+          property: url
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: SERVICE_ROLE_KEY
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: TIKTOK_CLIENT_KEY
+        sync: false
+      - key: TIKTOK_CLIENT_SECRET
+        sync: false
